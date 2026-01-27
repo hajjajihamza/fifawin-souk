@@ -25,6 +25,7 @@ Homestead.yaml
 Thumbs.db
 composer.lock
 package-lock.json
+yarn.lock
 
 # Project exclude paths
 /storage/app/
