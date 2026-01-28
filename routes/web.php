@@ -9,6 +9,10 @@ Route::get('/', function () {
 });
 
 Route::prefix('admin')->group(function () {
+    Route::get('/', static function () {
+        return redirect()->route('categories.index');
+    })->name('dashboard');
+
     // Categories
     Route::get('categories/archived', [CategoryController::class, 'archived'])->name('categories.archived');
     Route::patch('categories/{category}/restore', [CategoryController::class, 'restore'])->name('categories.restore');
