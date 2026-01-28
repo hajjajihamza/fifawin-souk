@@ -93,6 +93,13 @@
                         </tr>
                     @endforelse
                 </tbody>
+                <tfoot>
+                    <tr class="bg-gray-50 text-gray-600 text-sm uppercase tracking-wider">
+                        <td colspan="4" class="px-6 py-4">
+                            {{ $categories->links() }}
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>

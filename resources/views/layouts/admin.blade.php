@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - @yield('title')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 
 <body class="bg-gray-50 text-gray-900 font-sans">
@@ -27,15 +26,23 @@
                     <span>Dashboard</span>
                 </a>
                 <a href="{{ route('categories.index') }}"
-                    class="flex items-center space-x-3 p-3 rounded-lg {{ request()->routeIs('categories.*') ? 'bg-blue-600 text-white' : 'hover:bg-slate-800' }} transition-colors">
+                    @class([
+                        'flex items-center space-x-3 p-3 rounded-lg transition-colors',
+                        'bg-blue-600 text-white' => request()->routeIs('categories.*'),
+                        'hover:bg-slate-800' => !request()->routeIs('categories.*')
+                    ])>
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                     </svg>
                     <span>Catégories</span>
                 </a>
-                <a href="#"
-                    class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition-colors text-slate-400">
+                <a href="{{ route('products.index') }}"
+                    @class([
+                         'flex items-center space-x-3 p-3 rounded-lg transition-colors',
+                         'bg-blue-600 text-white' => request()->routeIs('products.*'),
+                         'hover:bg-slate-800' => !request()->routeIs('products.*')
+                     ])>
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
@@ -68,18 +75,14 @@
             <!-- Content Area -->
             <div class="p-8">
                 @if(session('success'))
-                    <div class="mb-4 p-4 bg-green-100 border-l-4 border-green-500 text-green-700 rounded shadow-sm flex justify-between items-center"
-                        x-data="{ show: true }" x-show="show">
+                    <div class="mb-4 p-4 bg-green-100 border-l-4 border-green-500 text-green-700 rounded shadow-sm flex justify-between items-center">
                         <span>{{ session('success') }}</span>
-                        <button @click="show = false" class="text-green-500 hover:text-green-700">&times;</button>
                     </div>
                 @endif
 
                 @if(session('error'))
-                    <div class="mb-4 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded shadow-sm flex justify-between items-center"
-                        x-data="{ show: true }" x-show="show">
+                    <div class="mb-4 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded shadow-sm flex justify-between items-center">
                         <span>{{ session('error') }}</span>
-                        <button @click="show = false" class="text-red-500 hover:text-gray-700">&times;</button>
                     </div>
                 @endif
 

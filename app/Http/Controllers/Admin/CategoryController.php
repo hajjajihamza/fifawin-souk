@@ -13,7 +13,8 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('created_at', 'desc')->paginate(10);
+
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -57,7 +58,7 @@ class CategoryController extends Controller
 
     public function archived()
     {
-        $categories = Category::onlyTrashed()->get();
+        $categories = Category::onlyTrashed()->orderBy('deleted_at', 'desc')->paginate(10);
         return view('admin.categories.archived', compact('categories'));
     }
 
