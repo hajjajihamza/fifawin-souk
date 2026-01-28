@@ -36,8 +36,7 @@
                                 {{ $category->deleted_at->format('d/m/Y H:i') }}
                             </td>
                             <td class="px-6 py-4 text-right space-x-2">
-                                <form action="{{ route('categories.restore', $category->id) }}" method="POST"
-                                    class="inline-block">
+                                <form action="{{ route('categories.restore', $category) }}" method="POST" class="inline-block">
                                     @csrf
                                     @method('PATCH')
                                     <button type="submit"
@@ -51,7 +50,7 @@
                                         Restaurer
                                     </button>
                                 </form>
-                                <form action="{{ route('categories.force-delete', $category->id) }}" method="POST"
+                                <form action="{{ route('categories.force-delete', $category) }}" method="POST"
                                     class="inline-block"
                                     onsubmit="return confirm('Attention ! Cette action est irréversible. Voulez-vous vraiment supprimer définitivement cette catégorie ?')">
                                     @csrf
