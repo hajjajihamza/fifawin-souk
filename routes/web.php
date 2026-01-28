@@ -4,11 +4,21 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 
+use App\Http\Controllers\AuthController;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('admin')->group(function () {
+// Authentication
+Route::controller(AuthController::class)
+    ->group(function () {
+        Route::get('login', 'index')->name('login');
+        Route::post('login', 'login');
+        Route::post('logout', 'logout')->name('logout');
+    });
+
+Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/', static function () {
         return redirect()->route('categories.index');
     })->name('dashboard');
@@ -25,3 +35,4 @@ Route::prefix('admin')->group(function () {
     Route::delete('products/{product}/force-delete', [ProductController::class, 'forceDelete'])->name('products.force-delete');
     Route::resource('products', ProductController::class);
 });
+
