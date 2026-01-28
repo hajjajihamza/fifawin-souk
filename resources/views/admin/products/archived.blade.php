@@ -38,7 +38,7 @@
                         <div class="text-[10px] text-gray-400">Archivé le {{ $product->deleted_at->format('d/m/Y H:i') }}</div>
                     </td>
                     <td class="px-6 py-4 text-right space-x-2">
-                        <form action="{{ route('products.restore', $product->id) }}" method="POST" class="inline-block">
+                        <form action="{{ route('products.restore', $product) }}" method="POST" class="inline-block">
                             @csrf
                             @method('PATCH')
                             <button type="submit" class="inline-flex items-center px-3 py-1 bg-green-50 text-green-700 border border-green-200 rounded-lg hover:bg-green-100 transition-colors text-xs font-medium" title="Restaurer">
@@ -46,7 +46,7 @@
                                 Restaurer
                             </button>
                         </form>
-                        <form action="{{ route('products.force-delete', $product->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Attention ! Cette action est irréversible. Voulez-vous vraiment supprimer définitivement ce produit ?')">
+                        <form action="{{ route('products.force-delete', $product) }}" method="POST" class="inline-block" onsubmit="return confirm('Attention ! Cette action est irréversible. Voulez-vous vraiment supprimer définitivement ce produit ?')">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="inline-flex items-center px-3 py-1 bg-red-50 text-red-700 border border-red-200 rounded-lg hover:bg-red-100 transition-colors text-xs font-medium" title="Supprimer définitivement">
