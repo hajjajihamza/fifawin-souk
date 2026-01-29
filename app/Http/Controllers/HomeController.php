@@ -23,5 +23,13 @@ class HomeController extends Controller
         ]);
     }
 
+    public function show(Product $product)
+    {
+        $relatedProducts = Product::where('category_id', $product->category_id)
+            ->where('id', '!=', $product->id)
+            ->limit(4)
+            ->get();
 
+        return view('show', compact('product', 'relatedProducts'));
+    }
 }

@@ -11,7 +11,8 @@ Route::get('/', [HomeController::class, 'index'])
     ->middleware('guest')
     ->name('home');
 
-
+Route::get('/products/{product}', [HomeController::class, 'show'])
+    ->name('products.show');
 
 // Authentication
 Route::controller(AuthController::class)
