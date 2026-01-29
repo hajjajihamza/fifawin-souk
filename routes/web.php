@@ -1,14 +1,17 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 
 use App\Http\Controllers\AuthController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])
+    ->middleware('guest')
+    ->name('home');
+
+
 
 // Authentication
 Route::controller(AuthController::class)
